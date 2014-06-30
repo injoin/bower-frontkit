@@ -1,0 +1,12 @@
+<div class="dropdown" ng-class="{ open: $dropdown.open }">
+    <div class="dropdown-container">
+        <div class="dropdown-input">
+            <input type="text" ng-model="$dropdown.search"
+                   placeholder="{{ $dropdown.items.length ? null : $dropdown.placeholder }}">
+        </div>
+
+        <span class="dropdown-caret"></span>
+    </div>
+
+    <dropdown-options></dropdown-options>
+</div>

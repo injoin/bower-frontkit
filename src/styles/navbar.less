@@ -1,0 +1,139 @@
+/* Navbar
+   ============================================================================================== */
+
+.navbar {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: @navbar-height;
+  border: 1px solid @navbar-border;
+  background-color: @navbar-bg;
+  border-radius: @navbar-border-radius;
+
+  .clear-float();
+}
+
+/* Navbar Brand
+   ------------ */
+.navbar-brand {
+  display: inline-block;
+  float: left;
+  padding-left: @padding-base-x;
+  padding-right: @padding-base-x;
+  color: @navbar-brand-color;
+  font-size: @font-size-large;
+  .navbar-spacing( @line-height-base * @font-size-large );
+
+  &,
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: @navbar-brand-hover-color;
+  }
+}
+
+/* Navbar nav
+   ---------- */
+.navbar .nav {
+  float: left;
+  .clear-float();
+}
+
+.navbar-nav .nav-item {
+  float: left;
+
+  > a {
+    color: @navbar-link;
+    padding-left: @padding-base-x;
+    padding-right: @padding-base-x;
+    .navbar-spacing();
+  }
+
+  &.active {
+    background-color: @navbar-active-link-bg;
+  }
+
+  &.active > a,
+  > a:hover {
+    color: @navbar-link-hover;
+  }
+}
+
+/* Navbar form
+   ----------- */
+.navbar-form :extend( .form-inline all ) {
+  float: left;
+  padding: 0 @padding-base-x;
+
+  .input {
+    .navbar-spacing( @input-height-base, margin );
+  }
+}
+
+/* Navbar text
+   ----------- */
+.navbar-text {
+  float: left;
+  margin: 0;
+  padding: 0 @padding-base-x;
+  color: @navbar-text;
+  .navbar-spacing();
+}
+
+/* Navbar link
+   ----------- */
+.navbar-link {
+  color: @navbar-link;
+
+  &:hover {
+    color: @navbar-link-hover;
+  }
+
+  &,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/* Fixed navbar
+   ------------ */
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: @zindex-navbar-fixed;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-radius: 0;
+}
+
+.navbar-fixed-top    { top: 0; }
+.navbar-fixed-bottom { bottom: 0; }
+
+/* Navbar collapsing
+   ----------------- */
+.navbar-toggle :extend( .btn all ) {
+  display: none;
+  margin: 0 @padding-base-x;
+
+  .icon {
+    display: block;
+    width: 1.5rem;
+    height: unit( @input-height-base, rem );
+  }
+}
+
+@media ( max-width: @screen-small-max ) {
+  .navbar-toggle {
+    display: inline-block;
+    float: left;
+    .navbar-spacing( @input-height-base, margin );
+  }
+
+  .navbar-collapse {
+    display: none;
+  }
+}

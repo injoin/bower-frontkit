@@ -1,0 +1,51 @@
+/* Headings
+   ============================================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: inherit;
+  font-family: @font-family-headings;
+  font-weight: @font-weight-headings;
+  text-rendering: optimizeLegibility;
+
+  small {
+    display: inline;
+    color: lighten( @text-color, 10% );
+    font-weight: normal;
+    line-height: 1;
+  }
+}
+
+
+h1 { font-size: 2.4rem; }
+h2 { font-size: 2.1rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+h1,
+h2,
+h3 {
+  margin-top: @margin-base-y;
+  margin-bottom: ( @margin-base-y / 2 );
+}
+
+h4,
+h5,
+h6 {
+  margin-top: ( @margin-base-y / 2 );
+  margin-bottom: ( @margin-base-y / 2 );
+}
+
+/* Page headers
+   ------------ */
+.page-header {
+  display: block;
+  margin-bottom: @margin-base-y;
+  border-bottom: 1px solid @gray-light-2;
+}

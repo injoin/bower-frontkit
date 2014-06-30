@@ -1,0 +1,24 @@
+/* Grid
+   ============================================================================================== */
+
+.row {
+  .make-row();
+}
+
+/*
+ * 1. Avoid column collapsing when empty
+ */
+.column {
+  position: relative;
+  float: left;
+  width: 100%;
+  min-height: 1px; /* 1 */
+  padding-left: @grid-gutter-width;
+  padding-right: @grid-gutter-width;
+}
+
+@media all                            { .all-grid-columns( tiny ); }
+@media ( min-width: @screen-small )   { .all-grid-columns( small ); }
+@media ( min-width: @screen-medium )  { .all-grid-columns( medium ); }
+@media ( min-width: @screen-large )   { .all-grid-columns( large ); }
+@media ( min-width: @screen-xlarge )  { .all-grid-columns( xlarge ); }

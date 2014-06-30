@@ -1,0 +1,279 @@
+/* Tables
+   ============================================================================================== */
+
+/*
+ * 1. Fix th alignment according to .text-* classes
+ */
+table.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: @margin-base-y;
+  background-color: @table-bg;
+
+  th,
+  &.text-left th,
+  th.text-left { .text-left; /* 1 */ }
+
+  &.text-center th,
+  th.text-center { .text-center; /* 1 */ }
+
+  &.text-right th,
+  th.text-right { .text-right; /* 1 */ }
+
+  &.text-justify th,
+  th.text-justify { .text-justify; /* 1 */ }
+
+  thead,
+  tbody,
+  tfoot {
+    > tr > th,
+    > tr > td {
+      padding: @padding-base-y @padding-base-x;
+      border-top: 1px solid @table-border;
+    }
+  }
+
+  thead:first-of-type > tr:first-child {
+    > td, > th { border-top: 0; }
+  }
+
+  thead + tbody,
+  tbody + tbody {
+    > tr:first-child {
+      > td, > th { border-top: 2px solid @table-header-border; }
+    }
+  }
+
+  tfoot,
+  thead { background-color: @table-bg-header; }
+
+  th small { font-weight: normal; }
+}
+
+/* Table Striping
+   -------------- */
+.table.table-striped {
+  > tbody > tr:nth-child( odd ) {
+    > td,
+    > th {
+      background-color: @table-bg-accent;
+    }
+  }
+}
+
+/* Bordered Table
+   -------------- */
+
+/*
+ * Cells within thead/tfoot have specific background, so
+ * 1. we specify @table-border for first cell in each <tr>
+ * 2. we specify @table-header-border for consecutive cells
+ */
+.table.table-bordered {
+  border: 1px solid @table-border;
+  border-left-width: 0;
+  border-collapse: separate;
+  border-radius: @table-border-radius;
+
+  > tbody > tr {
+    > td,
+    > th {
+      border-left: 1px solid @table-border;
+    }
+  }
+
+  > thead > tr,
+  > tfoot > tr {
+    td,
+    th {
+      border-left: 1px solid @table-header-border; /* 2 */
+    }
+
+    td:first-child,
+    th:first-child {
+      border-left: 1px solid @table-border; /* 1 */
+    }
+  }
+
+  colgroup:first-child + thead,
+  colgroup:first-child + tbody,
+  > thead:first-child,
+  > tbody:first-child {
+    > tr:first-child > td,
+    > tr:first-child > th {
+      &:first-child {
+        border-top-left-radius: @border-radius-base;
+      }
+
+      &:last-child {
+        border-top-right-radius: @border-radius-base;
+      }
+    }
+  }
+
+  > thead:last-child,
+  > tbody:last-child,
+  > tfoot:last-child {
+    > tr:last-child > td,
+    > tr:last-child > th {
+      &:first-child {
+        border-bottom-left-radius: @border-radius-base;
+      }
+
+      &:last-child {
+        border-bottom-right-radius: @border-radius-base;
+      }
+    }
+  }
+}
+
+/* Table Hover
+   ----------- */
+.table.table-hover {
+  > tbody > tr:hover {
+    td,
+    th {
+      background-color: @table-bg-hover;
+    }
+  }
+}
+
+/* Responsive table
+   ---------------- */
+
+/*
+ * 1. Ensure that content doesn't wrap
+ * 2. Remove external horizontal borders in each row, so that the parent can handle it
+ */
+@media ( max-width: @screen-small-max ) {
+  .table-responsive {
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    margin-bottom: @margin-base-y;
+    border: 1px solid @table-border;
+    border-radius: @table-border-radius;
+
+    > .table {
+      margin-bottom: 0;
+
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > td,
+          > th { white-space: nowrap; /* 1 */ }
+        }
+      }
+    }
+
+    > .table-bordered {
+      border: 0;
+
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th:first-child,
+          > td:first-child { border-left: 0; /* 2 */ }
+
+          > th:last-child,
+          > td:last-child { border-right: 0; /* 2 */ }
+        }
+      }
+    }
+  }
+}
+
+/* Table Grid sizing
+   ----------------- */
+table col.column {
+  float: none;
+  display: table-column;
+}
+
+table td.column,
+table th.column {
+  float: none;
+  display: table-cell;
+}
+
+/* Table Contextual classes
+   ------------------------ */
+.table tr,
+.table td,
+.table th {
+  &.active {
+    background-color: @table-bg-active;
+  }
+
+  &.success {
+    color: @table-text-success;
+    background-color: @table-bg-success;
+  }
+
+  &.danger {
+    color: @table-text-danger;
+    background-color: @table-bg-danger;
+  }
+
+  &.warning {
+    color: @table-text-warning;
+    background-color: @table-bg-warning;
+  }
+
+  &.info {
+    color: @table-text-info;
+    background-color: @table-bg-info;
+  }
+}
+
+.table > tbody > tr {
+  > td,
+  > th {
+    &.active,
+    &.success,
+    &.danger,
+    &.warning,
+    &.info {
+      padding-left: @padding-base-x - @one-px;
+      border-left: 2px solid transparent;
+    }
+
+    &.active  { border-left-color: @table-text-active; }
+    &.success { border-left-color: @table-text-success; }
+    &.danger  { border-left-color: @table-text-danger; }
+    &.warning { border-left-color: @table-text-warning; }
+    &.info    { border-left-color: @table-text-info; }
+  }
+}
+
+.table {
+  > tbody > tr > td,
+  > tbody > tr > th {
+    &.active + .active,
+    &.success + .success,
+    &.danger + .danger,
+    &.warning + .warning,
+    &.info + .info {
+      padding-left: @padding-base-x;
+    }
+
+    &.active + .active    { border-left: none; }
+    &.success + .success  { border-left: none; }
+    &.danger + .danger    { border-left: none; }
+    &.warning + .warning  { border-left: none; }
+    &.info + .info        { border-left: none; }
+  }
+
+  &.table-bordered {
+    > tbody > tr > td,
+    > tbody > tr > th {
+      &.active + .active    { border-left: 1px solid @table-border; }
+      &.success + .success  { border-left: 1px solid @table-border; }
+      &.danger + .danger    { border-left: 1px solid @table-border; }
+      &.warning + .warning  { border-left: 1px solid @table-border; }
+      &.info + .info        { border-left: 1px solid @table-border; }
+    }
+  }
+}

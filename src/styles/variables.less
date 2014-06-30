@@ -1,0 +1,271 @@
+// VARIABLES
+// -------------------------------------------------------------------------------------------------
+
+// Global
+// ------
+
+@xlarge-factor:               1.5;
+@large-factor:                1.25;
+@small-factor:                0.85;
+@tiny-factor:                 0.75;
+@one-px:                      unit( 1px / @font-size-base, rem );
+
+// Components
+// ----------
+
+// margin between components
+@margin-base-y:               unit( @line-height-base, rem );
+@margin-base-x:               unit( @line-height-base * .5, rem );
+
+@margin-small-y:              ( @margin-base-y * @small-factor );
+@margin-small-x:              ( @margin-base-x * @small-factor );
+
+// border-radius default sizing
+@border-radius-large:         6px;
+@border-radius-base:          4px;
+@border-radius-small:         3px;
+
+// paddings
+@padding-base-y:              .5rem;
+@padding-base-x:              1rem;
+
+@padding-large-y:             ( @padding-base-y * @large-factor );
+@padding-large-x:             ( @padding-base-x * @large-factor );
+
+@padding-small-y:             ( @padding-base-y * @small-factor );
+@padding-small-x:             ( @padding-base-x * @small-factor );
+
+// component sizing
+@offset-base-x:               ( @font-size-base * 10 );
+@height-base:                 unit( @line-height-base, rem ) + ( @padding-base-y * 2 ) + ( 2 * @one-px );
+
+// Colors
+// ------
+
+// Grays
+@gray:                        #999;
+@gray-dark-1:                 darken( @gray, 20% );
+@gray-dark-2:                 darken( @gray, 40% );
+@gray-dark-3:                 darken( @gray, 46.5% );
+@gray-light-1:                lighten( @gray, 20% );
+@gray-light-2:                lighten( @gray, 33.5% );
+@gray-light-3:                lighten( @gray, 38.5% );
+
+// Brands
+@brand-default:               #fff;
+@brand-primary:               #0088cc;
+@brand-success:               #5cb85c;
+@brand-warning:               #f0ad4e;
+@brand-danger:                #d9534f;
+@brand-info:                  #5bc0de;
+
+// Scaffolding
+// -----------
+@body-bg:                     #fff;
+@text-color:                  #333;
+@text-color-light:            #999;
+
+// Links
+@link-color:                  @brand-primary;
+@link-color-hover:            darken( @link-color, 15% );
+
+// Typography
+// ----------
+@font-family-sans-serif:      "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-serif:           Georgia, "Times New Roman", Times, serif;
+@font-family-monospace:       Monaco, Menlo, Consolas, "Courier New", monospace;
+@font-family-base:            @font-family-sans-serif;
+
+@font-size-base:              16px;
+@font-size-large:             unit( @large-factor, em );
+@font-size-small:             unit( @small-factor, em );
+
+// it's a good practice to keep units out of the line-height.
+// this way it will always be relative to the font-size.
+@line-height-base:            1.5;
+
+// Headings
+@font-family-headings:        @font-family-base;
+@font-weight-headings:        normal;
+
+// Icons
+// -----
+@icon-fontpath:               fonts;
+@icon-prefix:                 icon;
+
+// Z-Indexes
+// ---------
+@zindex-navbar-fixed:         1000;
+@zindex-dropdown-options:     1010;
+
+// Code
+// ----
+@code-color:                  #333;
+@code-border:                 #eee;
+@code-bg:                     lighten( @code-border, 5% );
+
+@kbd-color:                   #999;
+@kbd-border:                  #ddd;
+
+// Input
+// -----
+@input-bg:                    #fff;
+@input-disabled-bg:           #f4f4f4;
+
+@input-color:                 #606060;
+@input-placeholder-color:     lighten( @input-color, 10% );
+@input-border-radius:         @border-radius-base;
+@input-height-base:           @height-base;
+
+@input-border:                #ccc;
+@input-border-focus:          #52a8ec;
+
+// Buttons
+// -------
+@btn-border:                  #ccc;
+@btn-border-radius:           @border-radius-base;
+
+// Images
+// ------
+@image-rounded-radius:        4%;
+@image-border-color:          #eee;
+
+// Divider
+// -------
+@divider-color:               #eee;
+
+// Forms
+// -----
+@form-legend-font-size:       1.5rem;
+
+// Checkbox
+// --------
+@checkbox-size:               1rem;
+@checkbox-border-color:       @gray-light-1;
+
+@checkbox-check-width:        1rem;
+@checkbox-check-height:       .6rem;
+@checkbox-check-color:        @gray-dark-2;
+
+// Radio
+// -----
+@radio-size:                  1rem;
+@radio-border-color:          @gray-light-1;
+@radio-dot-color:             @gray-dark-2;
+@radio-dot-size:              @radio-size / 2;
+
+// Tables
+// ------
+@table-bg:                    @body-bg;
+@table-bg-header:             fade( #000, 5% );
+@table-bg-accent:             fade( #000, 3% );
+@table-bg-hover:              @table-bg-accent;
+@table-border:                @gray-light-2;
+@table-header-border:         darken( @table-border, 5% );
+
+@table-border-radius:         @border-radius-base;
+
+// Table contextual classes - bg
+@table-bg-active:             @table-bg-accent;
+@table-bg-success:            fade( @brand-success, 15% );
+@table-bg-danger:             fade( @brand-danger,  15% );
+@table-bg-warning:            fade( @brand-warning, 15% );
+@table-bg-info:               fade( @brand-info,    15% );
+
+// Table contextual classes - text
+@table-text-active:           @text-color;
+@table-text-success:          darken( @brand-success, 10% );
+@table-text-danger:           darken( @brand-danger,  10% );
+@table-text-warning:          darken( @brand-warning, 10% );
+@table-text-info:             darken( @brand-info,    10% );
+
+// Hero Unit
+// ---------
+@hero-unit-bg:                @gray-light-2;
+@hero-unit-padding-y:         @padding-large-y * 5;
+@hero-unit-padding-x:         @padding-large-x;
+
+// Input Groups
+// ------------
+@input-group-addon-bg:        @gray-light-2;
+@input-group-addon-border:    @gray-light-1;
+
+// Labels
+// ------
+@label-border-radius:         .3em;
+@label-font-size:             80%;
+@label-color:                 #fff;
+
+@label-default:               darken( @brand-default, 30% );
+@label-success:               darken( @brand-success, 15% );
+@label-info:                  darken( @brand-info,    15% );
+@label-warning:               darken( @brand-warning, 15% );
+@label-danger:                darken( @brand-danger,  15% );
+
+// Nav
+// ---
+@nav-list-link-color:         @link-color;
+@nav-list-link-hover-color:   @link-color-hover;
+@nav-list-header-color:       @gray-dark-1;
+@nav-list-hover-bg:           @gray-light-2;
+
+// Navbar
+// ------
+@navbar-bg:                   @gray-light-2;
+@navbar-height:               unit( 50px / @font-size-base, rem );
+@navbar-border-radius:        @border-radius-base;
+@navbar-border:               darken( @navbar-bg, 15% );
+@navbar-text:                 @gray-dark-1;
+
+@navbar-brand-color:          @gray;
+@navbar-brand-hover-color:    @gray-dark-2;
+
+@navbar-link:                 @gray-dark-1;
+@navbar-link-hover:           @gray-dark-3;
+@navbar-active-link-bg:       darken( @navbar-bg, 5% );
+
+// Progress bars
+// -------------
+@progressbar-height:          @height-base / 2;
+@progressbar-stripe-size:     @progressbar-height * 1.5;
+@progressbar-color:           @gray-light-3;
+
+// Dropdowns
+// ---------
+@dropdown-options-bg:         @body-bg;
+@dropdown-item-text:          @text-color;
+@dropdown-item-bg:            #fff;
+@dropdown-item-hover-bg:      @brand-primary;
+@dropdown-item-hover-text:    #fff;
+
+@dropdown-caret-size:         .3rem;
+
+// Grid
+// ----
+@grid-columns:                12 16 24;
+@_grid-gutter-width:          30px;
+@grid-gutter-width:           unit( 30px * @one-px, rem ) / 2;
+@block-grid-columns:          12;
+
+// We deduce 1 to make it percentage friendly
+@golden-ratio:                ( ( 1 + sqrt( 5 ) ) / 2 ) - 1;
+
+// Responsive Utils
+// ----------------
+@screen-xlarge:               1600px;
+@screen-large:                1200px;
+@screen-medium:               980px;
+@screen-small:                768px;
+@screen-tiny:                 360px;
+
+// Container sizing
+@container-xlarge:            1570px;
+@container-large:             1170px;
+@container-medium:            960px;
+@container-small:             750px;
+
+// Max media query sizing per each screen size
+@screen-large-max:            ( @screen-xlarge - 1px );
+@screen-medium-max:           ( @screen-large  - 1px );
+@screen-small-max:            ( @screen-medium - 1px );
+@screen-tiny-max:             ( @screen-small  - 1px );
