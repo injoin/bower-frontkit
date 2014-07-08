@@ -1,5 +1,5 @@
 /*!
- * frontkit v0.1.0
+ * frontkit v0.1.1
  * The powerful front-end framework from InJoin.
  *
  * https://github.com/injoin/frontkit
@@ -5748,32 +5748,111 @@ table th.column {
 }
 /* Table Contextual classes
    ------------------------ */
-.table tr.active,
-.table td.active,
-.table th.active {
+/*
+ * We need high specificty in these selectors, otherwise .table-striped would win.
+ * See #38 for details
+ */
+.table > thead > tr.active,
+.table > tbody > tr.active,
+.table > tfoot > tr.active,
+.table.table-striped > thead > tr.active,
+.table.table-striped > tbody > tr.active,
+.table.table-striped > tfoot > tr.active,
+.table > thead > tr > td.active,
+.table > tbody > tr > td.active,
+.table > tfoot > tr > td.active,
+.table.table-striped > thead > tr > td.active,
+.table.table-striped > tbody > tr > td.active,
+.table.table-striped > tfoot > tr > td.active,
+.table > thead > tr > th.active,
+.table > tbody > tr > th.active,
+.table > tfoot > tr > th.active,
+.table.table-striped > thead > tr > th.active,
+.table.table-striped > tbody > tr > th.active,
+.table.table-striped > tfoot > tr > th.active {
   background-color: rgba(0, 0, 0, 0.03);
 }
-.table tr.success,
-.table td.success,
-.table th.success {
+.table > thead > tr.success,
+.table > tbody > tr.success,
+.table > tfoot > tr.success,
+.table.table-striped > thead > tr.success,
+.table.table-striped > tbody > tr.success,
+.table.table-striped > tfoot > tr.success,
+.table > thead > tr > td.success,
+.table > tbody > tr > td.success,
+.table > tfoot > tr > td.success,
+.table.table-striped > thead > tr > td.success,
+.table.table-striped > tbody > tr > td.success,
+.table.table-striped > tfoot > tr > td.success,
+.table > thead > tr > th.success,
+.table > tbody > tr > th.success,
+.table > tfoot > tr > th.success,
+.table.table-striped > thead > tr > th.success,
+.table.table-striped > tbody > tr > th.success,
+.table.table-striped > tfoot > tr > th.success {
   color: #449d44;
   background-color: rgba(92, 184, 92, 0.15);
 }
-.table tr.danger,
-.table td.danger,
-.table th.danger {
+.table > thead > tr.danger,
+.table > tbody > tr.danger,
+.table > tfoot > tr.danger,
+.table.table-striped > thead > tr.danger,
+.table.table-striped > tbody > tr.danger,
+.table.table-striped > tfoot > tr.danger,
+.table > thead > tr > td.danger,
+.table > tbody > tr > td.danger,
+.table > tfoot > tr > td.danger,
+.table.table-striped > thead > tr > td.danger,
+.table.table-striped > tbody > tr > td.danger,
+.table.table-striped > tfoot > tr > td.danger,
+.table > thead > tr > th.danger,
+.table > tbody > tr > th.danger,
+.table > tfoot > tr > th.danger,
+.table.table-striped > thead > tr > th.danger,
+.table.table-striped > tbody > tr > th.danger,
+.table.table-striped > tfoot > tr > th.danger {
   color: #c9302c;
   background-color: rgba(217, 83, 79, 0.15);
 }
-.table tr.warning,
-.table td.warning,
-.table th.warning {
+.table > thead > tr.warning,
+.table > tbody > tr.warning,
+.table > tfoot > tr.warning,
+.table.table-striped > thead > tr.warning,
+.table.table-striped > tbody > tr.warning,
+.table.table-striped > tfoot > tr.warning,
+.table > thead > tr > td.warning,
+.table > tbody > tr > td.warning,
+.table > tfoot > tr > td.warning,
+.table.table-striped > thead > tr > td.warning,
+.table.table-striped > tbody > tr > td.warning,
+.table.table-striped > tfoot > tr > td.warning,
+.table > thead > tr > th.warning,
+.table > tbody > tr > th.warning,
+.table > tfoot > tr > th.warning,
+.table.table-striped > thead > tr > th.warning,
+.table.table-striped > tbody > tr > th.warning,
+.table.table-striped > tfoot > tr > th.warning {
   color: #ec971f;
   background-color: rgba(240, 173, 78, 0.15);
 }
-.table tr.info,
-.table td.info,
-.table th.info {
+.table > thead > tr.info,
+.table > tbody > tr.info,
+.table > tfoot > tr.info,
+.table.table-striped > thead > tr.info,
+.table.table-striped > tbody > tr.info,
+.table.table-striped > tfoot > tr.info,
+.table > thead > tr > td.info,
+.table > tbody > tr > td.info,
+.table > tfoot > tr > td.info,
+.table.table-striped > thead > tr > td.info,
+.table.table-striped > tbody > tr > td.info,
+.table.table-striped > tfoot > tr > td.info,
+.table > thead > tr > th.info,
+.table > tbody > tr > th.info,
+.table > tfoot > tr > th.info,
+.table.table-striped > thead > tr > th.info,
+.table.table-striped > tbody > tr > th.info,
+.table.table-striped > tfoot > tr > th.info {
   color: #31b0d5;
   background-color: rgba(91, 192, 222, 0.15);
 }

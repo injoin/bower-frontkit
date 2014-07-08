@@ -1,5 +1,5 @@
 /*!
- * frontkit v0.1.0
+ * frontkit v0.1.1
  * The powerful front-end framework from InJoin.
  *
  * https://github.com/injoin/frontkit
@@ -194,7 +194,7 @@
             ctrl.addItem = function( item ) {
                 if ( ctrl.maxItems === 1 ) {
                     ctrl.items = [ item ];
-                } else if ( !ctrl.isFull() ) {
+                } else if ( !ctrl.isFull() && !~ctrl.items.indexOf( item ) ) {
                     ctrl.items.push( item );
                 }
 
