@@ -1,5 +1,5 @@
 /*!
- * frontkit v0.1.1
+ * frontkit v0.1.2
  * The powerful front-end framework from InJoin.
  *
  * https://github.com/injoin/frontkit
@@ -6360,6 +6360,11 @@ select[multiple].input {
   color: #ffffff;
   background-color: #0088cc;
 }
+.dropdown-option.disabled {
+  color: #999999;
+  cursor: default;
+  background-color: transparent;
+}
 /* Multiple selection
    ------------------ */
 .dropdown.dropdown-multi .dropdown-item {
@@ -7012,4 +7017,21 @@ input[type="radio"]:checked + .radio:before {
 }
 .text-justify {
   text-align: justify;
+}
+/* Contextual text
+   --------------- */
+.text-muted {
+  color: #999999;
+}
+.text-success {
+  color: #5cb85c;
+}
+.text-info {
+  color: #5bc0de;
+}
+.text-warning {
+  color: #f0ad4e;
+}
+.text-danger {
+  color: #d9534f;
 }
