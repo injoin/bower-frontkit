@@ -1,5 +1,5 @@
 /*!
- * frontkit v0.1.2
+ * frontkit v0.2.0
  * The powerful front-end framework from InJoin.
  *
  * https://github.com/injoin/frontkit
@@ -4716,8 +4716,8 @@ input.navbar-toggle {
 .icon-dollar:before {
   content: "\e000";
 }
-.icon-external:before {
-  content: "\e804";
+.icon-asterisk:before {
+  content: "\e002";
 }
 .icon-plus:before {
   content: "\e003";
@@ -4826,6 +4826,9 @@ input.navbar-toggle {
 }
 .icon-list-numeric:before {
   content: "\e2c1";
+}
+.icon-calendar:before {
+  content: "\e2ce";
 }
 .icon-fontcase:before {
   content: "\e2e6";
@@ -5061,8 +5064,8 @@ input.navbar-toggle {
 .icon-volume-down:before {
   content: "\e5b4";
 }
-.icon-asterisk:before {
-  content: "\e002";
+.icon-volume-mute:before {
+  content: "\e5b5";
 }
 .icon-wifi:before {
   content: "\e5d0";
@@ -5409,8 +5412,8 @@ input.navbar-toggle {
 .icon-preview:before {
   content: "\e802";
 }
-.icon-volume-mute:before {
-  content: "\e5b5";
+.icon-external:before {
+  content: "\e804";
 }
 /* Lists
    ============================================================================================== */
@@ -6310,6 +6313,7 @@ select[multiple].input {
   cursor: pointer;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   border: 0.3rem solid transparent;
   border-top-color: #333333;
@@ -6325,7 +6329,7 @@ select[multiple].input {
  * 2. Add a frame effect to the options list
  * 3. Make sure it's shown on top of other elements
  */
-.dropdown-options {
+.dropdown-optgroups {
   position: absolute;
   z-index: 1010;
   /* 4 */
@@ -6342,8 +6346,26 @@ select[multiple].input {
   -webkit-box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-.dropdown.open .dropdown-options {
+.dropdown.open .dropdown-optgroups {
   display: block;
+}
+.dropdown-optgroup {
+  padding: 0 1rem;
+}
+.dropdown-optgroup.dropdown-optgroup-ungrouped {
+  padding-left: 0;
+}
+.dropdown-optgroup + .dropdown-optgroup {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+.dropdown-optgroup-label {
+  display: block;
+  padding: 0.425rem 0;
+  font-weight: bold;
+}
+.dropdown-options {
+  margin: 0 -1rem 0 0;
+  list-style: none;
 }
 /*
  * 1. When a option has empty text, make it at least one line tall.
@@ -6539,6 +6561,7 @@ input[type="checkbox"] + .checkbox:before {
   content: "";
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
   -webkit-transition: 0.1s linear opacity;
   -moz-transition: 0.1s linear opacity;
@@ -6862,6 +6885,12 @@ input[type="radio"]:checked + .radio:before {
 .navbar-link:hover {
   text-decoration: none;
 }
+/* Navbar button
+   ------------- */
+.navbar-btn {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 /* Fixed navbar
    ------------ */
 .navbar-fixed-top,
@@ -6901,6 +6930,51 @@ input[type="radio"]:checked + .radio:before {
   .navbar-collapse {
     display: none;
   }
+}
+/* Offcanvas
+   ============================================================================================== */
+.offcanvas {
+  overflow-x: hidden;
+}
+.offcanvas-active {
+  overflow-y: hidden;
+}
+.offcanvas-active:after {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1100;
+  content: "";
+  background: rgba(0, 0, 0, 0.25);
+}
+.offcanvas-menu {
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1110;
+  width: 50%;
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  -moz-transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  -o-transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+}
+.offcanvas-menu-active {
+  -webkit-transform: translateX(0%);
+  -moz-transform: translateX(0%);
+  -ms-transform: translateX(0%);
+  transform: translateX(0%);
+  -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.8);
 }
 /* Progress bars
    ============================================================================================== */
