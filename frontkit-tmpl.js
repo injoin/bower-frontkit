@@ -1,8 +1,8 @@
 /*!
- * frontkit v0.2.0
+ * frontkit v0.2.1
  * The powerful front-end framework from InJoin.
  *
- * https://github.com/injoin/frontkit
+ * http://frontkit.injoin.io
  */
 !function( ng ) {
     "use strict";

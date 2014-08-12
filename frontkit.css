@@ -1,8 +1,8 @@
 /*!
- * frontkit v0.2.0
+ * frontkit v0.2.1
  * The powerful front-end framework from InJoin.
  *
- * https://github.com/injoin/frontkit
+ * http://frontkit.injoin.io
  *
  * Includes normalize.css | MIT license | http://git.io/normalize
  */
@@ -362,6 +362,7 @@ td,
 th {
   padding: 0;
 }
+
 /* Responsive Utils
    ============================================================================================== */
 .show-tiny {
