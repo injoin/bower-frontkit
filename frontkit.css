@@ -1,12 +1,13 @@
 /*!
- * frontkit v0.2.1
+ * frontkit v0.3.0
  * The powerful front-end framework from InJoin.
  *
  * http://frontkit.injoin.io
  *
  * Includes normalize.css | MIT license | http://git.io/normalize
  */
-
+/* CSS Resets by Normalize.css
+   ============================================================================================== */
 /**
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
@@ -362,7 +363,6 @@ td,
 th {
   padding: 0;
 }
-
 /* Responsive Utils
    ============================================================================================== */
 .show-tiny {
@@ -6910,6 +6910,14 @@ input[type="radio"]:checked + .radio:before {
 .navbar-fixed-bottom {
   bottom: 0;
 }
+/* Static navbar
+   ------------- */
+.navbar-static {
+  z-index: 1000;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-radius: 0;
+}
 /* Navbar collapsing
    ----------------- */
 .navbar-toggle {
@@ -6946,9 +6954,10 @@ input[type="radio"]:checked + .radio:before {
   left: 0;
   right: 0;
   bottom: 0;
+  display: block;
   z-index: 1100;
-  content: "";
   background: rgba(0, 0, 0, 0.25);
+  content: "";
 }
 .offcanvas-menu {
   position: fixed;
@@ -6976,6 +6985,19 @@ input[type="radio"]:checked + .radio:before {
   transform: translateX(0%);
   -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.8);
+}
+/* Overlay
+   ============================================================================================== */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  z-index: 1100;
+  background: rgba(0, 0, 0, 0.25);
+  content: "";
 }
 /* Progress bars
    ============================================================================================== */
@@ -7060,6 +7082,43 @@ input[type="radio"]:checked + .radio:before {
   to {
     background-position: 0 0;
   }
+}
+/* Tooltip
+   ============================================================================================== */
+.tooltip {
+  position: fixed;
+  max-width: 120px;
+  margin-top: 5px;
+  padding: 0.425rem 0.85rem;
+  font-size: 0.85em;
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 4px;
+  opacity: 0;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -webkit-transition: 0.15s linear opacity;
+  -moz-transition: 0.15s linear opacity;
+  -o-transition: 0.15s linear opacity;
+  transition: 0.15s linear opacity;
+}
+.tooltip.visible {
+  opacity: 0.85;
+}
+.tooltip:before {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  content: "";
+  border: 5px solid transparent;
+  border-bottom-color: #000000;
+  border-top: none;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 /* Utils
    ============================================================================================== */
