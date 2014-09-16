@@ -1,5 +1,5 @@
 /*!
- * frontkit v0.3.0
+ * frontkit v0.3.1
  * The powerful front-end framework from InJoin.
  *
  * http://frontkit.injoin.io
