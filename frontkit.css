@@ -1,5 +1,5 @@
 /*!
- * frontkit v0.3.1
+ * frontkit v0.3.2
  * The powerful front-end framework from InJoin.
  *
  * http://frontkit.injoin.io
@@ -4701,8 +4701,12 @@ input.navbar-toggle {
 }
 /*
  * 1. Avoid bad rendering on Webkit
+ * 2. Use better alignment between icon and text
  */
 .icon:before {
+  position: relative;
+  top: 2px;
+  /* 2 */
   line-height: 1;
   font-family: frontkit;
   font-style: normal;
