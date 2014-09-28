@@ -1,5 +1,5 @@
 /*!
- * frontkit v0.3.2
+ * frontkit v0.3.3
  * The powerful front-end framework from InJoin.
  *
  * http://frontkit.injoin.io
@@ -77,6 +77,7 @@
 
     var $ = ng.element;
     var module = ng.module( "frontkit.dropdown", [
+        "frontkit.position",
         "frontkit.utils"
     ]);
 
@@ -86,7 +87,8 @@
 
     module.directive( "dropdown", [
         "$document",
-        function( $document ) {
+        "$$position",
+        function( $document, $$position ) {
             var definition = {};
 
             definition.restrict = "EA";
@@ -141,14 +143,22 @@
                     var clone = $( "<div>" ).append( children );
                     var items = clone.querySelector( ".dropdown-item" );
                     var optgroups = clone.querySelector( ".dropdown-optgroups" );
+                    var container = element.querySelector( ".dropdown-container" );
 
                     if ( items.length ) {
-                        element.querySelector( ".dropdown-container" ).prepend( items );
+                        container.prepend( items );
                     }
 
                     if ( optgroups.length ) {
                         element.querySelector( "dropdown-options" ).replaceWith( optgroups );
                     }
+
+                    $$position( optgroups, {
+                        x: "center",
+                        y: "bottom",
+                        copyWidth: true,
+                        target: container
+                    });
                 });
 
                 // DOM Events
@@ -736,50 +746,6 @@
         }
     ]);
 
-    module.service( "repeatParser", function() {
-        var self = this;
-
-        // RegExp directly taken from Angular.js ngRepeat source
-        // https://github.com/angular/angular.js/blob/v1.2.16/src/ng/directive/ngRepeat.js#L211
-        var exprRegex = /^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?\s*$/;
-        var itemRegex = /^(?:([\$\w]+)|\(([\$\w]+)\s*,\s*([\$\w]+)\))$/;
-
-        self.parse = function( expr ) {
-            var lhs, rhs, trackBy, key, item;
-            var match = ( expr || "" ).match( exprRegex );
-
-            if ( !match ) {
-                return;
-            }
-
-            lhs = match[ 1 ];
-            rhs = match[ 2 ];
-            trackBy = match[ 3 ];
-
-            match = lhs.match( itemRegex );
-            if ( !match ) {
-                return;
-            }
-
-            item = match[ 3 ] || match[ 1 ];
-            key = match[ 2 ];
-
-            return {
-                key: key,
-                item: item,
-                expr: rhs,
-                trackBy: trackBy
-            };
-        };
-
-        self.toNgRepeat = function( obj ) {
-            var lhs = obj.key ? "(" + obj.key + ", " + obj.item + ")" : obj.item;
-            var trackBy = obj.trackBy ? " track by " + obj.trackBy : "";
-
-            return lhs + " in " + obj.expr + trackBy;
-        };
-    });
-
 }( angular );
 !function( ng ) {
     "use strict";
@@ -940,6 +906,143 @@
     "use strict";
 
     var $ = ng.element;
+    var module = ng.module( "frontkit.position", [] );
+
+    var debounce = function( fn, wait ) {
+        var timeout;
+
+        return function() {
+            var ctx = this;
+            var args = arguments;
+            clearTimeout( timeout );
+
+            timeout = setTimeout(function() {
+                fn.apply( ctx, args );
+            }, wait );
+        };
+    };
+
+    module.provider( "$$position", function() {
+        var provider = {};
+        var getPosition = function( axis, pos ) {
+            var regexp = getPosition[ axis ];
+            return regexp.test( pos ) ? pos : provider.defaults[ axis ];
+        };
+        getPosition.x = /^left|center|right$/;
+        getPosition.y = /^top|center|bottom$/;
+
+        provider.defaults = {
+            x: "center",
+            y: "center"
+        };
+
+        provider.repositionDelay = 10;
+
+        provider.$get = function( $window ) {
+            var elements = [];
+            var getRect = function( element ) {
+                var options = element.data( module.name );
+                var targetRect = options.target[ 0 ].getBoundingClientRect();
+                var selfRect = element[ 0 ].getBoundingClientRect();
+
+                return {
+                    target: targetRect,
+                    self: selfRect
+                };
+            };
+
+            var reposition = function( rect, element ) {
+                var top, left;
+                var options = element.data( module.name );
+                var width = options.copyWidth ? rect.target.width : rect.self.width;
+                var height = options.copyHeight ? rect.target.height : rect.self.height;
+
+                if ( options.copyWidth ) {
+                    element.css( "width", width + "px" );
+                }
+
+                if ( options.copyHeight ) {
+                    element.css( "height", height + "px" );
+                }
+
+                switch ( options.x ) {
+                    case "left":
+                        left = rect.target.left - rect.self.width;
+                        break;
+
+                    case "center":
+                        left = rect.target.left + ( rect.target.width / 2 ) - ( width / 2 );
+                        break;
+
+                    case "right":
+                        left = rect.target.right;
+                        break;
+                }
+
+                switch ( options.y ) {
+                    case "top":
+                        top = rect.target.top - rect.self.height;
+                        break;
+
+                    case "center":
+                        top = rect.target.top + ( rect.target.height / 2 ) - ( height / 2 );
+                        break;
+
+                    case "bottom":
+                        top = rect.target.bottom;
+                        break;
+                }
+
+                element.css({
+                    position: "fixed",
+                    top: top + "px",
+                    left: left + "px",
+                    right: "auto",
+                    bottom: "auto",
+                    "z-index": ( +options.target.style( "z-index" ) || 0 ) + 1
+                });
+            };
+
+            $( $window ).on( "resize scroll", debounce(function() {
+                elements.forEach(function( element ) {
+                    reposition( getRect( element ), element );
+                });
+            }, provider.repositionDelay ) );
+
+            return function( element, options ) {
+                element = $( element );
+
+                options = options || {};
+                options.target = $( options.target );
+
+                if ( !element.length || !options.target.length ) {
+                    return;
+                }
+
+                options.x = getPosition( "x", options.x );
+                options.y = getPosition( "y", options.y );
+                element.data( module.name, options );
+
+                elements.push( element );
+                element.on( "$destroy", function() {
+                    elements.splice( elements.indexOf( element ), 1 );
+                });
+
+                element.scope().$watch(function() {
+                    return getRect( element );
+                }, function( rect ) {
+                    reposition( rect, element );
+                }, true );
+            };
+        };
+
+        return provider;
+    });
+}( angular );
+!function( ng ) {
+    "use strict";
+
+    var $ = ng.element;
     var module = ng.module( "frontkit.tooltip", [] );
 
     module.directive( "tooltip", [
@@ -1079,6 +1182,50 @@
             });
         }
     ]);
+
+    module.service( "repeatParser", function() {
+        var self = this;
+
+        // RegExp directly taken from Angular.js ngRepeat source
+        // https://github.com/angular/angular.js/blob/v1.2.16/src/ng/directive/ngRepeat.js#L211
+        var exprRegex = /^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?\s*$/;
+        var itemRegex = /^(?:([\$\w]+)|\(([\$\w]+)\s*,\s*([\$\w]+)\))$/;
+
+        self.parse = function( expr ) {
+            var lhs, rhs, trackBy, key, item;
+            var match = ( expr || "" ).match( exprRegex );
+
+            if ( !match ) {
+                return;
+            }
+
+            lhs = match[ 1 ];
+            rhs = match[ 2 ];
+            trackBy = match[ 3 ];
+
+            match = lhs.match( itemRegex );
+            if ( !match ) {
+                return;
+            }
+
+            item = match[ 3 ] || match[ 1 ];
+            key = match[ 2 ];
+
+            return {
+                key: key,
+                item: item,
+                expr: rhs,
+                trackBy: trackBy
+            };
+        };
+
+        self.toNgRepeat = function( obj ) {
+            var lhs = obj.key ? "(" + obj.key + ", " + obj.item + ")" : obj.item;
+            var trackBy = obj.trackBy ? " track by " + obj.trackBy : "";
+
+            return lhs + " in " + obj.expr + trackBy;
+        };
+    });
 
     // Extensions to jQLite
     $.prototype.querySelector = function( str ) {
